@@ -1,0 +1,16 @@
+[
+    {
+        "question": "TypeScriptはどのような言語ですか？",
+        "choices": ["動的型付け", "静的型付け", "どちらでもない"],
+        "correctAnswer": 1,
+        "imageUrl": "https://example.com/image.png",
+        "correctRate": 75.5
+    },
+    {
+        "question": "あわわわわ",
+        "choices": ["動的型付け", "静的型付け", "どちらでもない"],
+        "correctAnswer": 1,
+        "imageUrl": "https://example.com/image.png",
+        "correctRate": 75.5
+    }
+]

@@ -8,7 +8,7 @@ export class Quiz {
         return this.questions[this.currentQuestinIndex];
     }
     checkAnswer(chiceIndex) {
-        const correct = this.questions[this.currentQuestinIndex].correctAnswer === chiceIndex;
+        const correct = this.questions[this.currentQuestinIndex].getCorrectAnswer() === chiceIndex;
         if (correct)
             this.score++;
         this.currentQuestinIndex++;

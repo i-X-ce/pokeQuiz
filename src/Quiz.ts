@@ -14,7 +14,7 @@ export class Quiz {
     }
 
     checkAnswer(chiceIndex: number): boolean {
-        const correct = this.questions[this.currentQuestinIndex].correctAnswer === chiceIndex;
+        const correct = this.questions[this.currentQuestinIndex].getCorrectAnswer() === chiceIndex;
         if (correct) this.score++;
         this.currentQuestinIndex++;
         return correct;
