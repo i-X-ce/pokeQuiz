@@ -1,4 +1,4 @@
-export class QuizQuestion{
+export class quizQuestion{
     private question: string;
     private choices: string[];
     private correctAnswer: number;

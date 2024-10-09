@@ -1,30 +1,63 @@
-import { QuizQuestion } from "./QuizQuestion.js";
+// import { QuizManager } from "./QuizManager.js";
+// import { QuizQuestion } from "./QuizQuestion.js";
+// // import { quizQuestions } from "./QuizQuestion.js";
 
-export class Quiz {
-    private currentQuestinIndex: number = 0;
-    private score: number = 0;
-    private questions: QuizQuestion[];
 
-    constructor(quiestions: QuizQuestion[]){
-        this.questions = quiestions;
-    }
+// // const quiz = new Quiz(quizQuestions);
+// let quiz: QuizManager;
 
-    getCurrentQuestion(): QuizQuestion {
-        return this.questions[this.currentQuestinIndex];
-    }
+// function gid(id: string) {
+//     return document.getElementById(id);
+// }
 
-    checkAnswer(chiceIndex: number): boolean {
-        const correct = this.questions[this.currentQuestinIndex].getCorrectAnswer() === chiceIndex;
-        if (correct) this.score++;
-        this.currentQuestinIndex++;
-        return correct;
-    }
+// async function getQuizzes() {
+//     let quizList: QuizQuestion[] = [];
+//     const jsonQuizzes = await fetchQuizzes();
+//     {
+//         jsonQuizzes.forEach((temp: QuizQuestion) => {
+//             const addQ = new QuizQuestion(temp);
+//             quizList.push(addQ);
+//         });
+//     }
+//     quiz = new QuizManager(quizList);
+// }
 
-    isQuizOver(): boolean {
-        return this.currentQuestinIndex >= this.questions.length;
-    }
+// function renderQuestion() {
+//     const question = quiz.getCurrentQuestion();
+//     gid("question-text")!.textContent = question.getQuestion();
 
-    getScore(): number {
-        return this.score;
-    }
-}
+//     const choicesContainer = gid("choices-container")!;
+//     choicesContainer.innerHTML = "";
+//     question.getChoices().forEach((choice: string | null, index: number) => {
+//         const button = document.createElement("button");
+//         button.textContent = choice;
+//         button.addEventListener("click", () => {
+//             quiz.checkAnswer(index);
+//             if (quiz.isQuizOver()) {
+//                 showFinalScore();
+//             } else {
+//                 renderQuestion();
+//             }
+//         });
+//         choicesContainer.appendChild(button);
+//     });
+// }
+
+// function showFinalScore(){
+//     document.getElementById("quiz-container")!.innerHTML = `SCORE: ${quiz.getScore()}`;
+// }
+
+// async function fetchQuizzes() {
+//     const response = await fetch('http://127.0.0.1:5501/quizzes');
+//     const quizzes = await response.json();
+//     return quizzes;
+// }
+
+// async function initializeApp() {
+//     await getQuizzes();
+//     renderQuestion();
+// }
+// // renderQuestion();
+// window.addEventListener('DOMContentLoaded', initializeApp);
+// // window.addEventListener('DOMContentLoaded', displayQuizzes);
+

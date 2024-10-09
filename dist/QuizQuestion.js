@@ -1,4 +1,4 @@
-export class QuizQuestion {
+export class quizQuestion {
     constructor(quiz) {
         this.question = quiz.question;
         this.choices = quiz.choices;
