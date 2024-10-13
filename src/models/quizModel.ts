@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+
 export const quizSchema = new Schema({
     question: String,
     choices: [String],
@@ -8,5 +9,6 @@ export const quizSchema = new Schema({
     correctCnt: Number,
     description: String
 });
+
 const Quiz = mongoose.model('Question', quizSchema); // 'Question'という名前でコレクションが作成される
 export default Quiz;

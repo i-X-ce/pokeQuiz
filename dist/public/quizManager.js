@@ -1,30 +1,23 @@
-import { quizQuestion } from "./quizQuestion";
-
 export class quizManager {
-    private currentQuestinIndex: number = 0;
-    private score: number = 1;
-    private questions: quizQuestion[];
-
-    constructor(quiestions: quizQuestion[]){
+    constructor(quiestions) {
+        this.currentQuestinIndex = 0;
+        this.score = 0;
         this.questions = quiestions;
     }
-
-    getCurrentQuestion(): quizQuestion {
+    getCurrentQuestion() {
         return this.questions[this.currentQuestinIndex];
     }
-
-    checkAnswer(chiceIndex: number): boolean {
+    checkAnswer(chiceIndex) {
         const correct = this.questions[this.currentQuestinIndex].getCorrectAnswer() === chiceIndex;
-        if (correct) this.score++;
+        if (correct)
+            this.score++;
         this.currentQuestinIndex++;
         return correct;
     }
-
-    isQuizOver(): boolean {
+    isQuizOver() {
         return this.currentQuestinIndex >= this.questions.length;
     }
-
-    getScore(): number {
+    getScore() {
         return this.score;
     }
 }

@@ -7,18 +7,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import mongoose from "mongoose";
-import { quizSchema } from "../models/quizModel.js";
-import express from "express";
-const router = express.Router();
-const Question = mongoose.model('Question', quizSchema);
-router.get('/quizGetAll', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+import Quiz from "../models/quizModel.js";
+export const getAllQuestions = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const questions = yield Question.find({});
-        return res.send(questions);
+        const questions = yield Quiz.find();
+        res.json(questions);
     }
-    catch (_a) {
-        console.error("Error fetching questions");
+    catch (error) {
+        res.status(500).json({ message: 'Error fetching questions' });
     }
-}));
-export default router;
+});
+export const addQuiz = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const newQuestion = new Quiz(req.body);
+    try {
+        const savedQuestion = yield newQuestion.save();
+        res.status(201).json(savedQuestion);
+    }
+    catch (erorr) {
+        res.status(500).json({ message: 'Error adding question' });
+    }
+});

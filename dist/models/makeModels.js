@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import { quizSchema } from "./question.js";
+import Quiz from "./quizModel.js";
 dotenv.config();
 mongoose.connect(process.env.MONGO_QUESTIONS_URL)
     .then(() => {
@@ -10,8 +10,7 @@ mongoose.connect(process.env.MONGO_QUESTIONS_URL)
     .catch(() => {
     console.error('MongoDB connection error');
 });
-const Question = mongoose.model('Question', quizSchema);
-const newQuestion = new Question({
+const newQuestion = new Quiz({
     question: "TypeScriptはどのような言語ですか？",
     choices: ["動的型付け", "静的型付け", "どちらでもない"],
     correctAnswer: 1,
