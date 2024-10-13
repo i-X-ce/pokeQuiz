@@ -1,4 +1,4 @@
-import { quizQuestion } from "./quizQuestion";
+import { quizQuestion } from "./quizQuestion.js";
 
 export class quizManager {
     private currentQuestinIndex: number = 0;
@@ -9,14 +9,22 @@ export class quizManager {
         this.questions = quiestions;
     }
 
+    getQuestions(): quizQuestion[] {
+        return this.questions;
+    }
+
     getCurrentQuestion(): quizQuestion {
         return this.questions[this.currentQuestinIndex];
     }
 
     checkAnswer(chiceIndex: number): boolean {
-        const correct = this.questions[this.currentQuestinIndex].getCorrectAnswer() === chiceIndex;
-        if (correct) this.score++;
-        this.currentQuestinIndex++;
+        const currentQuestion = this.questions[this.currentQuestinIndex];
+        const correct = currentQuestion.correctAnswer === chiceIndex;
+        if (correct){
+            this.score++;
+            currentQuestion.isCorrect = true;
+        }
+        // this.currentQuestinIndex++;
         return correct;
     }
 
@@ -26,5 +34,9 @@ export class quizManager {
 
     getScore(): number {
         return this.score;
+    }
+
+    stepQuestion() {
+        this.currentQuestinIndex++;
     }
 }

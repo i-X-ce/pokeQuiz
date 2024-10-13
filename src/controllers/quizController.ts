@@ -19,3 +19,17 @@ export const addQuiz = async (req: Request, res: Response) => {
         res.status(500).json({ message: 'Error adding question' });
     }
 };
+
+// 回答数と正答数をアップデートする
+export const updateCnt = async (req: Request, res: Response) => {
+    try {
+        const updateQuestion = await Quiz.findByIdAndUpdate(
+            req.body.id,
+            { $inc: { answerCnt: 1, correctCnt: req.body.addCorrect }},
+            { new: true }
+        );
+        console.log('Update quiz:', updateQuestion);
+    } catch (error) {
+        console.error('Error incrementing quiz cnt:', error);
+    }
+};

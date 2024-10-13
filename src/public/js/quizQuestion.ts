@@ -1,30 +1,64 @@
 export class quizQuestion{
-    private question: string;
-    private choices: string[];
-    private correctAnswer: number;
-    private imageUrl: string;
-    private answerCnt: number;
-    private correctCnt: number;
+    private _id: string;
+    private _question: string;
+    private _choices: string[];
+    private _correctAnswer: number;
+    private _imageUrl: string;
+    private _answerCnt: number;
+    private _correctCnt: number;
+    private _isCorrect: boolean = false;
+    private _description: string;
+    private _isAnswer: boolean = false;
 
     constructor(quiz: any){
-        this.question = quiz.question;
-        this.choices = quiz.choices;
-        this.correctAnswer = quiz.correctAnswer;
-        this.imageUrl = quiz.imageUrl;
-        this.answerCnt = quiz.answerCnt;
-        this.correctCnt = quiz.correctCnt;
+        this._id = quiz._id;
+        this._question = quiz.question;
+        this._choices = quiz.choices;
+        this._correctAnswer = quiz.correctAnswer;
+        this._imageUrl = quiz.imageUrl;
+        this._answerCnt = quiz.answerCnt;
+        this._correctCnt = quiz.correctCnt;
+        this._description = quiz.description;
     }
 
-    getChoices() {
-        return this.choices;
+    get id(){
+        return this._id;
     }
 
-    getQuestion(){
-        return this.question;
+    get choices(){
+        return this._choices;
     }
 
-    getCorrectAnswer(){
-        return this.correctAnswer;
+    get question(){
+        return this._question;
+    }
+
+    get correctAnswer(){
+        return this._correctAnswer;
+    }
+
+    get answerCnt(){
+        return this._answerCnt;
+    }
+
+    get isCorrect(){
+        return this._isCorrect;
+    }
+
+    get discription(){
+        return this._description;
+    }
+
+    get isAnswer(){
+        return this._isAnswer;
+    }
+
+    set isCorrect(isCorrect: boolean){
+        this._isCorrect = isCorrect;
+    }
+
+    set isAnswer(isAnswer: boolean){
+        this._isAnswer = isAnswer;
     }
 }
 

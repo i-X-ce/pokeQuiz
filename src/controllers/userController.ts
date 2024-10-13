@@ -6,14 +6,13 @@ export const createUser = async (req: Request, res: Response) => {
     const hasshedPassword = await bcrypt.hash(req.body.password, 10);
     req.body.password = hasshedPassword;
     const newUser = new User(req.body);
-    console.log(hasshedPassword);
     
     try {
         const saveUser = await newUser.save();
         res.status(201).json(saveUser);
     } catch (error) {
         if (error.code === 11000){
-            console.error('このIDは使用できません。');
+            console.error('このIDは既に使用されています。');
             res.status(500).json({ message: 'Error adding id'});
         }else{
             res.status(500).json({ message: 'Error adding user'});

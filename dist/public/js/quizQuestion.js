@@ -1,20 +1,45 @@
 export class quizQuestion {
     constructor(quiz) {
-        this.question = quiz.question;
-        this.choices = quiz.choices;
-        this.correctAnswer = quiz.correctAnswer;
-        this.imageUrl = quiz.imageUrl;
-        this.answerCnt = quiz.answerCnt;
-        this.correctCnt = quiz.correctCnt;
+        this._isCorrect = false;
+        this._isAnswer = false;
+        this._id = quiz._id;
+        this._question = quiz.question;
+        this._choices = quiz.choices;
+        this._correctAnswer = quiz.correctAnswer;
+        this._imageUrl = quiz.imageUrl;
+        this._answerCnt = quiz.answerCnt;
+        this._correctCnt = quiz.correctCnt;
+        this._description = quiz.description;
     }
-    getChoices() {
-        return this.choices;
+    get id() {
+        return this._id;
     }
-    getQuestion() {
-        return this.question;
+    get choices() {
+        return this._choices;
     }
-    getCorrectAnswer() {
-        return this.correctAnswer;
+    get question() {
+        return this._question;
+    }
+    get correctAnswer() {
+        return this._correctAnswer;
+    }
+    get answerCnt() {
+        return this._answerCnt;
+    }
+    get isCorrect() {
+        return this._isCorrect;
+    }
+    get discription() {
+        return this._description;
+    }
+    get isAnswer() {
+        return this._isAnswer;
+    }
+    set isCorrect(isCorrect) {
+        this._isCorrect = isCorrect;
+    }
+    set isAnswer(isAnswer) {
+        this._isAnswer = isAnswer;
     }
 }
 // export const quizQuestions: QuizQuestion[] = [

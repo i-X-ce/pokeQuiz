@@ -1,18 +1,8 @@
-// import { QuizManager } from "./QuizManager.js";
-// import { QuizQuestion } from "./QuizQuestion.js";
-// // import { quizQuestions } from "./QuizQuestion.js";
-
+import { gid } from "./common.js";
 import { quizManager } from "./quizManager.js";
 import { quizQuestion } from "./quizQuestion.js";
 
-
-// // const quiz = new Quiz(quizQuestions);
-// let quiz: QuizManager;
 let qm: quizManager;
-
-function gid(id: string) {
-    return document.getElementById(id);
-}
 
 async function getQuizzes() {
     let quizList: quizQuestion[] = [];
@@ -39,20 +29,20 @@ async function getQuizzes() {
 
 function renderQuestion() {
     const question = qm.getCurrentQuestion();
-    gid("question-text")!.textContent = question.getQuestion();
+    gid("question-text")!.textContent = question.question;
+    gid("description")!.textContent = "";
 
     const choicesContainer = gid("choices-container")!;
     choicesContainer.innerHTML = "";
-    question.getChoices().forEach((choice: string | null, index: number) => {
+    question.choices.forEach((choice: string | null, index: number) => {
         const button = document.createElement("button");
         button.textContent = choice;
         button.addEventListener("click", () => {
+            if (qm.getCurrentQuestion().isAnswer) return;
+            qm.getCurrentQuestion().isAnswer = true;
             qm.checkAnswer(index);
-            if (qm.isQuizOver()) {
-                showFinalScore();
-            } else {
-                renderQuestion();
-            }
+            gid('description')!.innerText = qm.getCurrentQuestion().discription;
+                
         });
         choicesContainer.appendChild(button);
     });
@@ -60,6 +50,19 @@ function renderQuestion() {
 
 function showFinalScore(){
     document.getElementById("quiz-container")!.innerHTML = `SCORE: ${qm.getScore()}`;
+    qm.getQuestions().forEach(question => { // 正答数のアップデート
+        const addCorrect: number = question.isCorrect ? 1 : 0;
+        fetch('/api/quizUpdateCnt', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',  // 必要なヘッダー
+            },
+            body: JSON.stringify({ 
+                id: question.id,
+                addCorrect: addCorrect
+            })
+        })
+    });
 }
 
 // async function fetchQuizzes() {
@@ -72,6 +75,16 @@ async function initializeApp() {
     await getQuizzes();
     renderQuestion();
 }
+
+gid('next')!.addEventListener('click', _ => { 
+    qm.stepQuestion();
+    if (qm.isQuizOver()) {
+        showFinalScore();
+    } else {
+        renderQuestion();
+    }
+});
+
 // // renderQuestion();
 window.addEventListener('DOMContentLoaded', initializeApp);
 // // window.addEventListener('DOMContentLoaded', displayQuizzes);

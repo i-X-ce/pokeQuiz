@@ -4,14 +4,20 @@ export class quizManager {
         this.score = 0;
         this.questions = quiestions;
     }
+    getQuestions() {
+        return this.questions;
+    }
     getCurrentQuestion() {
         return this.questions[this.currentQuestinIndex];
     }
     checkAnswer(chiceIndex) {
-        const correct = this.questions[this.currentQuestinIndex].getCorrectAnswer() === chiceIndex;
-        if (correct)
+        const currentQuestion = this.questions[this.currentQuestinIndex];
+        const correct = currentQuestion.correctAnswer === chiceIndex;
+        if (correct) {
             this.score++;
-        this.currentQuestinIndex++;
+            currentQuestion.isCorrect = true;
+        }
+        // this.currentQuestinIndex++;
         return correct;
     }
     isQuizOver() {
@@ -19,5 +25,8 @@ export class quizManager {
     }
     getScore() {
         return this.score;
+    }
+    stepQuestion() {
+        this.currentQuestinIndex++;
     }
 }

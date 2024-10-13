@@ -13,14 +13,13 @@ export const createUser = (req, res) => __awaiter(void 0, void 0, void 0, functi
     const hasshedPassword = yield bcrypt.hash(req.body.password, 10);
     req.body.password = hasshedPassword;
     const newUser = new User(req.body);
-    console.log(hasshedPassword);
     try {
         const saveUser = yield newUser.save();
         res.status(201).json(saveUser);
     }
     catch (error) {
         if (error.code === 11000) {
-            console.error('このIDは使用できません。');
+            console.error('このIDは既に使用されています。');
             res.status(500).json({ message: 'Error adding id' });
         }
         else {

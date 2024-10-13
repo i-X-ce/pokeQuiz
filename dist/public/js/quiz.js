@@ -1,6 +1,3 @@
-// import { QuizManager } from "./QuizManager.js";
-// import { QuizQuestion } from "./QuizQuestion.js";
-// // import { quizQuestions } from "./QuizQuestion.js";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -10,14 +7,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import { gid } from "./common.js";
 import { quizManager } from "./quizManager.js";
 import { quizQuestion } from "./quizQuestion.js";
-// // const quiz = new Quiz(quizQuestions);
-// let quiz: QuizManager;
 let qm;
-function gid(id) {
-    return document.getElementById(id);
-}
 function getQuizzes() {
     return __awaiter(this, void 0, void 0, function* () {
         let quizList = [];
@@ -40,26 +33,38 @@ function getQuizzes() {
 }
 function renderQuestion() {
     const question = qm.getCurrentQuestion();
-    gid("question-text").textContent = question.getQuestion();
+    gid("question-text").textContent = question.question;
+    gid("description").textContent = "";
     const choicesContainer = gid("choices-container");
     choicesContainer.innerHTML = "";
-    question.getChoices().forEach((choice, index) => {
+    question.choices.forEach((choice, index) => {
         const button = document.createElement("button");
         button.textContent = choice;
         button.addEventListener("click", () => {
+            if (qm.getCurrentQuestion().isAnswer)
+                return;
+            qm.getCurrentQuestion().isAnswer = true;
             qm.checkAnswer(index);
-            if (qm.isQuizOver()) {
-                showFinalScore();
-            }
-            else {
-                renderQuestion();
-            }
+            gid('description').innerText = qm.getCurrentQuestion().discription;
         });
         choicesContainer.appendChild(button);
     });
 }
 function showFinalScore() {
     document.getElementById("quiz-container").innerHTML = `SCORE: ${qm.getScore()}`;
+    qm.getQuestions().forEach(question => {
+        const addCorrect = question.isCorrect ? 1 : 0;
+        fetch('/api/quizUpdateCnt', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json', // 必要なヘッダー
+            },
+            body: JSON.stringify({
+                id: question.id,
+                addCorrect: addCorrect
+            })
+        });
+    });
 }
 // async function fetchQuizzes() {
 //     const response = await fetch('http://127.0.0.1:5501/quizzes');
@@ -72,6 +77,15 @@ function initializeApp() {
         renderQuestion();
     });
 }
+gid('next').addEventListener('click', _ => {
+    qm.stepQuestion();
+    if (qm.isQuizOver()) {
+        showFinalScore();
+    }
+    else {
+        renderQuestion();
+    }
+});
 // // renderQuestion();
 window.addEventListener('DOMContentLoaded', initializeApp);
 // // window.addEventListener('DOMContentLoaded', displayQuizzes);

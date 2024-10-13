@@ -7,7 +7,8 @@ export const quizSchema = new Schema({
     imageUrl: String,
     answerCnt: Number,
     correctCnt: Number,
-    description: String
+    description: String,
+    userName: String,
 });
 
 const Quiz = mongoose.model('Question', quizSchema); // 'Question'という名前でコレクションが作成される
