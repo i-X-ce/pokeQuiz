@@ -6,12 +6,28 @@
     <title>バグポケクイズ</title>
 </head>
 <body>
+    <header>
+        <h1>BPQuiz</h1>
+    </header>
     <div id="quiz-container">
-        <p id="question-text"></p>
+        <div id="question-header">
+            <div id="question-number">1</div>
+            <div id="question-header-detail">
+                <div id="question-header-user" class="larger-text">ア▶イス</div>
+                <div id="question-header-percentage" class="larger-text">90.8</div>
+            </div>
+        </div>
+        <div id="question-text"></div>
         <div id="choices-container"></div>
+        <div id="next">次へ</div>
+        <div id="description"></div>
     </div>
-    <div id="description"></div>
-    <button id="next">次へ</button>
+    <div id="result-container">
+        <div id="score"></div>
+        <a href="index.html">ホームへ</a>
+    </div>
 </body>
 <script type="module" src="./js/quiz.js"></script>
+<link rel="stylesheet" href="./css/quiz.css">
+<link rel="stylesheet" href="./css/common.css">
 </html>

@@ -1,0 +1,85 @@
+#result-container{
+    display: none;
+}
+
+header{
+    h1{
+        padding: 20px;
+    }
+}
+
+#quiz-container{
+    position: relative;
+    margin: 50px;
+}
+
+#question-header{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--bc-thin);
+}
+
+#question-number{
+    font-size: 5rem;
+    margin-right: 10px;
+}
+
+#question-number::before{
+    content: "問題";
+}
+
+#question-header-detail{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#question-header-user::before{
+    content: "投稿者: ";
+}
+
+#question-header-percentage::before{
+    content: "正答率: ";
+}
+
+#question-header-percentage::after{
+    content: "%";
+}
+
+#question-text{
+    margin: 20px;
+}
+
+#choices-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.choice{
+    margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: x-large;
+    box-shadow: 1px 1px 1px;
+}
+
+.bc-red{
+    border-left: 10px solid var(--bc-red);
+    background-color: var(--bc-red-thin);
+}
+
+.bc-green{
+    border-left: 10px solid var(--bc-green);
+    background-color: var(--bc-green-thin);
+}
+
+.bc-blue{
+    border-left: 10px solid var(--bc-blue);
+    background-color: var(--bc-blue-thin);
+}
+
+.bc-yellow{
+    border-left: 10px solid var(--bc-yellow);
+    background-color: var(--bc-yellow-thin);
+}
+

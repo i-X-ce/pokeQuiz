@@ -37,9 +37,11 @@ function renderQuestion() {
     gid("description").textContent = "";
     const choicesContainer = gid("choices-container");
     choicesContainer.innerHTML = "";
+    const collors = ["red", "green", "blue", "yellow"];
     question.choices.forEach((choice, index) => {
-        const button = document.createElement("button");
+        const button = document.createElement("div");
         button.textContent = choice;
+        button.classList.add(`bc-${collors[index % collors.length]}`, "choice");
         button.addEventListener("click", () => {
             if (qm.getCurrentQuestion().isAnswer)
                 return;
@@ -51,7 +53,9 @@ function renderQuestion() {
     });
 }
 function showFinalScore() {
-    document.getElementById("quiz-container").innerHTML = `SCORE: ${qm.getScore()}`;
+    gid("result-container").style.display = "flex";
+    gid("score").innerHTML = `SCORE: ${qm.getScore()}`;
+    gid("quiz-container").style.display = "none";
     qm.getQuestions().forEach(question => {
         const addCorrect = question.isCorrect ? 1 : 0;
         fetch('/api/quizUpdateCnt', {
