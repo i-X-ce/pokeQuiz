@@ -10,7 +10,7 @@ export const createUser = async (req: Request, res: Response) => {
     try {
         const saveUser = await newUser.save();
         res.status(201).json(saveUser);
-    } catch (error) {
+    } catch (error: any) {
         if (error.code === 11000){
             console.error('このIDは既に使用されています。');
             res.status(500).json({ message: 'Error adding id'});
