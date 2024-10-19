@@ -10,9 +10,10 @@ export class quizManager {
     getCurrentQuestion() {
         return this.questions[this.currentQuestinIndex];
     }
-    checkAnswer(chiceIndex) {
+    checkAnswer(choiceIndex) {
         const currentQuestion = this.questions[this.currentQuestinIndex];
-        const correct = currentQuestion.correctAnswer === chiceIndex;
+        currentQuestion.selectedAnswer = choiceIndex;
+        const correct = currentQuestion.correctAnswer === choiceIndex;
         if (correct) {
             this.score++;
             currentQuestion.isCorrect = true;

@@ -17,9 +17,10 @@ export class quizManager {
         return this.questions[this.currentQuestinIndex];
     }
 
-    checkAnswer(chiceIndex: number): boolean {
+    checkAnswer(choiceIndex: number): boolean {
         const currentQuestion = this.questions[this.currentQuestinIndex];
-        const correct = currentQuestion.correctAnswer === chiceIndex;
+        currentQuestion.selectedAnswer = choiceIndex;
+        const correct = currentQuestion.correctAnswer === choiceIndex;
         if (correct){
             this.score++;
             currentQuestion.isCorrect = true;

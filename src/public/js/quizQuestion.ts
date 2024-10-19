@@ -9,6 +9,9 @@ export class quizQuestion{
     private _isCorrect: boolean = false;
     private _description: string;
     private _isAnswer: boolean = false;
+    private _userName: string;
+    private _title: string;
+    private _selectedAnswer: number = 0;
 
     constructor(quiz: any){
         this._id = quiz._id;
@@ -19,6 +22,8 @@ export class quizQuestion{
         this._answerCnt = quiz.answerCnt;
         this._correctCnt = quiz.correctCnt;
         this._description = quiz.description;
+        this._userName = quiz.userName;
+        this._title = quiz.title;
     }
 
     get id(){
@@ -41,16 +46,32 @@ export class quizQuestion{
         return this._answerCnt;
     }
 
+    get correctCnt(){
+        return this._correctCnt;
+    }
+
     get isCorrect(){
         return this._isCorrect;
     }
 
-    get discription(){
+    get description(){
         return this._description;
     }
 
     get isAnswer(){
         return this._isAnswer;
+    }
+
+    get userName(){
+        return this._userName;
+    }
+
+    get title(){
+        return this._title;
+    }
+
+    get selectedAnswer(){
+        return this._selectedAnswer;
     }
 
     set isCorrect(isCorrect: boolean){
@@ -59,6 +80,10 @@ export class quizQuestion{
 
     set isAnswer(isAnswer: boolean){
         this._isAnswer = isAnswer;
+    }
+
+    set selectedAnswer(selectedAnswer: number){
+        this._selectedAnswer = selectedAnswer
     }
 }
 

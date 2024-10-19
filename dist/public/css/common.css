@@ -2,25 +2,24 @@
     padding: 0;
     margin: 0;
     color: var(--bc-text) ;
-    background-color: var(--bc-background);
+
+    font-family: "Kiwi Maru", serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 :root{
-    --bc-background: #FFFFFF;
+    --bc-white: #FFFFFF;
     --bc-text: #000000;
-    --bc-thin: #cccccc;
-    --bc-red: #fc9191;
-    --bc-green: #9bffad;
-    --bc-blue: #9cb6ff;
-    --bc-yellow: #fdd870;
-    --bc-red-thin: #ffcbcb;
-    --bc-green-thin: #d7ffde;
-    --bc-blue-thin: #d6e1ff;
-    --bc-yellow-thin: #ffefc2;
+    --bc-shadow: #00000034;
+    --bc-red: #fa4949;
+    --bc-green: #51d675;
+    --bc-blue: #3e98ff;
+    --bc-yellow: #ffca38;
 }
 
-header{
-    box-shadow: 0 0 5px black;
+a{
+    text-decoration: none;
 }
 
 .larger-text{
@@ -35,3 +34,35 @@ header{
     font-size: x-large;
 }
 
+.dense-text{
+    color: var(--bc-dense);
+}
+
+.column-wraper{
+    display: flex;
+    flex-direction: column;
+}
+
+.background-red{
+    background-color: var(--bc-red);
+}
+
+.background-green{
+    background-color: var(--bc-green);
+}
+
+.background-blue{
+    background-color: var(--bc-blue);
+}
+
+.background-yellow{
+    background-color: var(--bc-yellow);
+}
+
+svg{
+    height: 3rem;
+}
+
+.font-color-shadow{
+    color: var(--bc-shadow);
+}

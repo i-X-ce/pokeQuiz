@@ -8,6 +8,7 @@ export const quizSchema = new Schema({
     correctCnt: Number,
     description: String,
     userName: String,
+    title: String,
 });
 const Quiz = mongoose.model('Question', quizSchema); // 'Question'という名前でコレクションが作成される
 export default Quiz;

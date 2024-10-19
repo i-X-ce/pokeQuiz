@@ -4,28 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>バグポケクイズ</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Kiwi+Maru&display=swap');
+    </style>
+    <script src="./js/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-    <header>
-        <h1>BPQuiz</h1>
-    </header>
+    <div id="head-container">
+        <div id="title">けつばんの図鑑番号</div>
+        <div id="head-question-user" class="head-chip"><div id="question-user" class="head-chip-content"></div></div>
+        <div id="head-question-percentage" class="head-chip"><div id="question-percentage" class="head-chip-content"></div></div>
+        <div id="head-question-score" class="head-chip"><div id="question-score" class="head-chip-content"></div></div>
+    </div>
     <div id="quiz-container">
-        <div id="question-header">
+        <!-- <div id="question-header">
             <div id="question-number">1</div>
             <div id="question-header-detail">
-                <div id="question-header-user" class="larger-text">ア▶イス</div>
-                <div id="question-header-percentage" class="larger-text">90.8</div>
+                <div id="question-header-user" class="larger-text dense-text">ア▶イス</div>
+                <div id="question-header-percentage" class="larger-text dense-text">90.8</div>
+            </div>
+        </div> -->
+        <div id="question-container" class="end-disappears">
+            <div id="question-number">1</div>
+            <div id="question-text"></div>
+            <div id="description-container" class="choice-appear">
+                <div id="iscorrect" class="choice-appear"></div>
+                <div id="answer-container">
+                    <div id="answer" class="choice-appear">静的型付け</div>
+                    <div id="description" class="choice-appear">ここに説明</div>
+                </div>
             </div>
         </div>
-        <div id="question-text"></div>
-        <div id="choices-container"></div>
-        <div id="next">次へ</div>
-        <div id="description"></div>
+        
+        <div id="choices-container" class="end-disappears"></div>
+        <div id="next" class="choice-appear move-button end-disappears">次へ<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg></div>
     </div>
-    <div id="result-container">
+    <div id="result-container" class="end-appear">
         <div id="score"></div>
-        <a href="index.html">ホームへ</a>
+        <div id="result-buttons">
+            <a href="quiz.html"><div id="retry" class="move-button background-blue"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/></svg>もう一度</div></a>
+            <a href="index.html"><div id="home" class="move-button background-yellow">ホームへ<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg></div></a>
+        </div>
     </div>
+    <dl id="past-questions-container" class="end-appear">
+        <dt>
+            <span class="font-color-shadow">Q.</span>
+            <span class="past-question-number font-color-shadow">1</span>
+            <span class="past-question-title">test</span>
+            <svg class="icon-x" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
+            <svg class="icon-o" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224 96a160 160 0 1 0 0 320 160 160 0 1 0 0-320zM448 256A224 224 0 1 1 0 256a224 224 0 1 1 448 0z"/></svg>
+        </dt>
+        <dd>
+            <div class="past-answer-container">
+                <div class="column-wrapper">
+                    <p>あなたの回答</p>
+                    <div class="past-your-answer past-answers">test</div>
+                </div>
+                <div class="column-wrapper">
+                    <p>答え</p>
+                    <div class="past-correct-answer past-answers">test</div>
+                </div>                
+            </div>
+            <div class="past-answer-description">test</div>
+        </dd>
+    </dl>
 </body>
 <script type="module" src="./js/quiz.js"></script>
 <link rel="stylesheet" href="./css/quiz.css">
